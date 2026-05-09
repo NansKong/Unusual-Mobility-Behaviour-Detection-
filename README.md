@@ -88,21 +88,7 @@ unusual_mobility_detection/
    ```
    *This caches the model locally to `models/videomae_ucf/` to prevent HuggingFace timeout failures.*
 
-## 5. Developer Workflow (Split Execution)
-
-### Dev A (Tracking & Trajectories)
-* **Day 1:** Environment setup + YOLO smoke test on 1 UCF video.
-* **Day 2:** DeepSORT integration; track IDs visualization.
-* **Day 3:** Trajectory cleaning & extracting Branch A 11-dim features. Hand-off CSV to Dev B.
-
-### Dev B (Embeddings & Clustering)
-* **Day 1:** Pre-download VideoMAE model & verify CLS token shape. (Done via `download_model.py` and `step4b_vmae.py`)
-* **Day 4:** Receive Dev A's track CSV. Run Branch B VideoMAE on track bounding boxes.
-* **Day 5:** StandardScaler + PCA (fit on normal set only) + Fusion.
-* **Day 6:** HDBSCAN + continuous score [0,1] & cluster visualization.
-* **Day 7:** End-to-end evaluation (AUC $\ge$ 0.80) & annotated video export.
-
-## 6. Known Failure Modes & Mitigations
+## 5. Known Failure Modes & Mitigations
 * **Numpy ImportError:** Ensure `numpy==1.26.4` is strictly pinned.
 * **OOM (Out of Memory):** Call `torch.cuda.empty_cache()` per track in Stage 4B.
 * **All tracks labeled -1 (Noise):** Decrease `min_cluster_size` to 3, or fallback to DBSCAN.
