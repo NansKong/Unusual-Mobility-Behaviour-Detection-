@@ -1,0 +1,23 @@
+# Virtual env
+venv/
+
+# Outputs
+outputs/
+
+# Dataset
+data/
+
+# Documents
+PRD.txt
+*.pdf
+
+# Ignore large model weights
+models/videomae_ucf/model.safetensors
+
+# HuggingFace cache
+.cache/
+
+# Optional
+__pycache__/
+*.pyc
+.DS_Store
