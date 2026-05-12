@@ -12,7 +12,13 @@ PRD.txt
 *.pdf
 
 # Ignore large model weights
-models/videomae_ucf/model.safetensors
+models/*
+
+# But allow these specific essential files
+!models/videomae_ucf/README.md
+!models/videomae_ucf/videomae_base_crime_detection.ipynb
+!models/videomae_ucf/training_args.bin
+!models/yolov8n.pt
 
 # HuggingFace cache
 .cache/
