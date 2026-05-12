@@ -11,6 +11,9 @@ data/
 PRD.txt
 *.pdf
 
+# Allow PDFs in the docs folder
+!docs/*.pdf
+
 # Ignore large model weights
 models/*
 
