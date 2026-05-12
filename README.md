@@ -38,14 +38,24 @@ The system fuses the outputs of two parallel branches into a 61-dimensional feat
 ```text
 unusual_mobility_detection/
 ├── data/
-│   └── ucf_crime/
-│       ├── annotations/       # Temporal_Anomaly_Annotation.txt
-│       └── videos/            # Raw .mp4/.avi video files
+│   ├── ucf_crime/
+│   │   ├── annotations/       # Temporal_Anomaly_Annotation.txt
+│   │   └── videos/            # Raw .mp4/.avi video files
+│   └── UCF_Crimes-Train-Test-Split/
+│       ├── Action_Regnition_splits/
+│       └── Anomaly_Detection_splits/
+├── docs/
+│   ├── README_dev_a.md        # Dev A–specific documentation
+│   ├── requirements_dev_a.txt # Dev A–specific dependencies
+│   ├── Unusual_Mobility_Detection_PRD_v2.pdf
+│   └── Unusual_Mobility_Detection_ResearchPaper.docx
 ├── models/
 │   ├── yolov8n.pt             # Auto-downloaded by ultralytics
 │   └── videomae_ucf/          # Cached HuggingFace VideoMAE model
 ├── src/
+│   ├── download_data.py       # Script to download UCF-Crime dataset
 │   ├── download_model.py      # Script to locally cache VideoMAE
+│   ├── download_sample_video.py # Download a sample test video
 │   ├── step0_sampling.py      # Frame extraction
 │   ├── step1_detect.py        # YOLOv8n person detection
 │   ├── step2_track.py         # DeepSORT tracking
@@ -55,11 +65,16 @@ unusual_mobility_detection/
 │   ├── step5_fuse.py          # Scaling + PCA + fusion
 │   ├── step6_cluster.py       # HDBSCAN + anomaly scoring
 │   ├── step7_eval.py          # AUC + visualisation
-│   └── pipeline.py            # Full end-to-end runner
+│   ├── pipeline.py            # Full end-to-end runner
+│   ├── pipeline_dev_a.py      # Dev A–only runner (Stages 0–4A)
+│   └── pipeline_dev_b.py      # Dev B–only runner (Stages 4B–7)
 ├── outputs/
+│   ├── features/              # Branch A, B, and fused feature CSVs
+│   ├── tracks/                # Cleaned track CSVs
 │   ├── scores/                # Per-track anomaly score CSVs
 │   ├── videos/                # Annotated output videos
 │   └── plots/                 # Score distribution charts
+├── PRD.txt
 ├── requirements.txt
 └── README.md
 ```
